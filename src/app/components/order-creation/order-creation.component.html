@@ -1,0 +1,90 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+
+<div class="container" *ngIf="showMainDiv">
+	<div class="card bg-light">
+		<article class="card-body mx-auto" style="max-width: 400px;">
+			<div class="form-group input-group">
+				<div class="input-group-prepend">
+					<span class="input-group-text"> <i class="fa fa-building"></i> </span>
+				</div>
+				<select class="form-control">
+                    <option selected="">Izaberite prodavca</option>
+					<option *ngFor="let prodavac of prodavci" [value]="prodavac.id"> <input type="hidden" id="prodavacId" [value]="prodavac.username"> {{ prodavac.username }}</option>
+				</select>
+			</div>
+
+            <div *ngIf="show">
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                    </div>
+                    <select class="form-control" [(ngModel)]="odabraniArtikli" multiple>
+                        <option selected="">Izaberite artikle za porucivanje</option>
+                        <option *ngFor="let artikal of artikliOdabranogProdavca" [value]="artikal"> {{ artikal.naziv }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary  btn-block" (click)="racun()"> Zavrsi kupovinu  </button>
+                </div>
+            </div>
+
+            <div class="form-group" *ngIf="buttonShow">
+                <button type="submit" class="btn btn-primary  btn-block" (click)="display()" (click)="getArtikliProdavcaByProdavacUsername(getProdavacId())"> Izaberi  </button>
+            </div>
+		</article>
+	</div>
+</div>
+
+<div *ngIf="showFinalOrder">
+    <div class="card bg-light">
+        <article class="card-body mx-auto" style="max-width: 400px;">
+            <form [formGroup]="porudzbinaForm">
+                <div *ngFor="let artikal of odabraniArtikli">
+                    <div class="form-group input-group">
+                        <div id="image">
+                            <img id="img" alt="Problem sa slikom :(" src="data:image/jpeg;base64,{{ artikal.putanjaSlike }}"/>
+                        </div>
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <label>Artikal: </label> </span>
+                        </div>
+                        <input type="text" class="form-control" [value]="artikal.naziv" formControlName="naziv" readonly>
+                    </div>
+        
+                    <div class="form-group input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <label>Kolicina: </label> </span>
+                        </div>
+                        <input type="number" class="form-control" min="1" max="5" formControlName="kolicina">
+                    </div>
+        
+                    <div class="form-group input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <label>Cena: </label> </span>
+                        </div>
+                        <input type="text" class="form-control" [value]="artikal.cena" formControlName="cena" readonly>
+                    </div>
+    
+                    <hr>
+                </div>
+    
+                <div>
+                    <div class="form-group input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <label>Ukupna cena porudzbine: </label> </span>
+                        </div>
+                        <input type="text" class="form-control" readonly>
+                    </div>
+    
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary  btn-block"> Poruci  </button>
+                    </div>
+                </div>
+            </form>
+        </article>
+    </div>
+</div>

@@ -1,0 +1,192 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+
+
+<!--PRIKAZ ZA AZURIRANJE-->
+<div class="container" *ngIf="isUrlMyArticle()">
+    <div class="search-results">
+        <div class="row pt-5">
+            <div class="col-md-12 p-3">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <div class="card-title text-center">
+                            {{ article.naziv }}
+                            <div class="container">
+                                <hr>
+                                <form [formGroup]="updateArticleForm">
+                                    <div>
+                                        <img id="img" alt="Problem sa slikom :(" src="data:image/jpeg;base64,{{ article.putanjaSlike }}"/>
+                                    </div>
+
+                                    <div class="form-group input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"> <i class="fa fa-asterisk"></i> </span>
+                                        </div>
+                                        <input type="text" name="naziv" id="naziv" class="form-control" value="{{ article.naziv }}" placeholder="Unesite naziv artikla" formControlName="naziv">
+                                    </div>
+                        
+                                    <div class="form-group input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"> <i class="fa fa-asterisk"></i> </span>
+                                        </div>
+                                        <input type="text" name="opis" class="form-control" value="{{ article.opis }}" placeholder="Unesite opis artikla" formControlName="opis">
+                                    </div>
+                        
+                                    <div class="form-group input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cash-stack" viewBox="0 0 16 16">
+                                                <path d="M1 3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1H1zm7 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/>
+                                                <path d="M0 5a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V5zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V7a2 2 0 0 1-2-2H3z"/>
+                                            </svg> <i class="fa fa-hand-o-right" aria-hidden="true"></i> </span>
+                                        </div>
+                                        <input type="text" name="cena" class="form-control" value="{{ article.cena }}" placeholder="Unesite cenu artikla" formControlName="cena">
+                                    </div>
+
+                                    <div class="form-group input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"> <i class="fa fa-file"></i> </span>
+                                        </div>
+                                        <input type="file" class="form-control" placeholder="Unesite sliku artikla" (change)="upload($event)">
+                                    </div>
+                        
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary  btn-block" (click)="update()"> Azuriraj  </button>
+                                    </div>                                                               
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!--PRIKAZ ZA PRIKAZ DETALJA-->
+<div class="container" *ngIf="isArticleDetails()">
+    <div class="search-results">
+        <div class="row pt-5">
+            <div class="col-md-12 p-3">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <div class="card-title text-center">
+                            {{ article.naziv }}
+                                <div class="container">
+                                <hr>
+                                <div>
+                                    <img id="img" alt="Problem sa slikom :(" src="data:image/jpeg;base64,{{ article.putanjaSlike }}"/>
+                                </div>
+
+                                <div class="form-group input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="fa fa-asterisk"></i> </span>
+                                     </div>
+                                    <input type="text" name="naziv" class="form-control" value="{{ article.naziv }}" placeholder="Unesite naziv artikla" readonly>
+                                </div>
+                        
+                                <div class="form-group input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="fa fa-asterisk"></i> </span>
+                                     </div>
+                                    <input type="text" name="opis" class="form-control" value="{{ article.opis }}" placeholder="Unesite opis artikla" readonly>
+                                </div>
+                        
+                                <div class="form-group input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cash-stack" viewBox="0 0 16 16">
+                                            <path d="M1 3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1H1zm7 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/>
+                                            <path d="M0 5a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V5zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V7a2 2 0 0 1-2-2H3z"/>
+                                            </svg> <i class="fa fa-hand-o-right" aria-hidden="true"></i> </span>
+                                    </div>
+                                    <input type="text" name="cena" class="form-control" value="{{ article.cena }}" placeholder="Unesite cenu artikla" readonly>
+                                </div>
+
+                                <div class="form-group input-group" *ngIf="!isUrlMyArticle()">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="fa fa-asterisk"></i> </span>
+                                    </div>
+                                    <input type="text" name="prodavac" class="form-control" value="{{ article.prodavac.username }}" placeholder="Unesite korisnicko ime prodavca koji prodaje artikal" readonly>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!--PRIKAZ ZA DODAVANJE NOVOG ARTIKLA-->
+<div class="container" *ngIf="isNoviArtikal()">
+    <div class="search-results">
+        <div class="row pt-5">
+            <div class="col-md-12 p-3">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <div class="card-title text-center">
+                            <div class="container"> 
+                                <form [formGroup]="createArticleForm">
+                                    <div class="form-group input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"> <i class="fa fa-asterisk"></i> </span>
+                                        </div>
+                                        <input type="text" name="naziv" id="naziv" class="form-control" placeholder="Unesite naziv artikla" formControlName="naziv">
+                                    </div>
+                                
+                                    <div class="form-group input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"> <i class="fa fa-asterisk"></i> </span>
+                                        </div>
+                                        <input type="text" name="opis" class="form-control" placeholder="Unesite opis artikla" formControlName="opis">
+                                    </div>
+                                
+                                    <div class="form-group input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cash-stack" viewBox="0 0 16 16">
+                                                <path d="M1 3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1H1zm7 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/>
+                                                <path d="M0 5a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V5zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V7a2 2 0 0 1-2-2H3z"/>
+                                                </svg> <i class="fa fa-hand-o-right" aria-hidden="true"></i> </span>
+                                        </div>
+                                        <input type="text" name="cena" class="form-control" placeholder="Unesite cenu artikla" formControlName="cena">
+                                    </div>
+
+                                    <div class="form-group input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cash-stack" viewBox="0 0 16 16">
+                                                <path d="M1 3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1H1zm7 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/>
+                                                <path d="M0 5a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V5zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V7a2 2 0 0 1-2-2H3z"/>
+                                                </svg> <i class="fa fa-hand-o-right" aria-hidden="true"></i> </span>
+                                        </div>
+                                        <select name="akcije" formControlName="akcijeIds" multiple>
+                                            <option selected="">Bez akcije, odbi sirotinjo</option>
+                                            <option disabled>----------------------------------------</option>
+                                            <option *ngFor="let akcija of akcijeProdavca" [value]="akcija.id">{{ akcija.tekst }}
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"> <i class="fa fa-file"></i> </span>
+                                        </div>
+                                        <input type="file" class="form-control" placeholder="Unesite sliku artikla" (change)="upload($event)">
+                                    </div>
+                                
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary  btn-block" (click)="create()"> Kreiraj  </button>
+                                    </div>                                                               
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

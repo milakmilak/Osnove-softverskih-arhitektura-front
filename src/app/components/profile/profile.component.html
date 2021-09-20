@@ -1,0 +1,124 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+
+
+
+<div class="container" >
+    <div class="search-results">
+        <div class="row pt-5">
+            <div class="col-md-12 p-3">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <div class="card-title text-center">
+                                <div class="container">
+                                <hr>
+                                <form [formGroup]="promenaPodatakaProdavcaForm" *ngIf="isProdavac">
+                                    {{ prodavac.username }}
+                                    <div class="form-group input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                                         </div>
+                                        <input type="text" name="naziv" class="form-control" placeholder="Unesite novo ime" formControlName="imeProdavca">
+                                    </div>
+                            
+                                    <div class="form-group input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                                         </div>
+                                        <input type="text" name="opis" class="form-control" placeholder="Unesite novo prezime" formControlName="prezimeProdavca">
+                                    </div>
+    
+                                    <div class="form-group input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                                         </div>
+                                        <input type="text" name="opis" class="form-control" placeholder="Unesite novi username" formControlName="newUsernameProdavca">
+                                    </div>
+    
+                                    <div class="form-group input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"> <i class="fa fa-asterisk"></i> </span>
+                                         </div>
+                                        <input type="password" name="opis" class="form-control" placeholder="Unesite stari password" formControlName="oldPasswordProdavca">
+                                    </div>
+    
+                                    <div class="form-group input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"> <i class="fa fa-asterisk"></i> </span>
+                                         </div>
+                                        <input type="password" name="opis" class="form-control" placeholder="Unesite novi password" formControlName="newPasswordProdavca">
+                                    </div>
+    
+                                    <div class="form-group input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"> <i class="fa fa-asterisk"></i> </span>
+                                         </div>
+                                        <input type="password" name="opis" class="form-control" placeholder="Ponovite password" formControlName="repeatedPasswordProdavca">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary  btn-block" (click)="updateProdavac()"> Promeni podatke  </button>
+                                    </div>   
+                                </form>
+
+
+
+                                <form [formGroup]="promenaPodatakaKupcaForm" *ngIf="isKupac">
+                                    {{ kupac.username }}
+                                    <div class="form-group input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                                         </div>
+                                        <input type="text" name="naziv" class="form-control" placeholder="Unesite novo ime" formControlName="imeKupca">
+                                    </div>
+                            
+                                    <div class="form-group input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                                         </div>
+                                        <input type="text" name="opis" class="form-control" placeholder="Unesite novo prezime" formControlName="prezimeKupca">
+                                    </div>
+    
+                                    <div class="form-group input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                                         </div>
+                                        <input type="text" name="opis" class="form-control" placeholder="Unesite novi username" formControlName="newUsernameKupca">
+                                    </div>
+    
+                                    <div class="form-group input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"> <i class="fa fa-asterisk"></i> </span>
+                                         </div>
+                                        <input type="password" name="opis" class="form-control" placeholder="Unesite stari password" formControlName="oldPasswordKupca">
+                                    </div>
+    
+                                    <div class="form-group input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"> <i class="fa fa-asterisk"></i> </span>
+                                         </div>
+                                        <input type="password" name="opis" class="form-control" placeholder="Unesite novi password" formControlName="newPasswordKupca">
+                                    </div>
+    
+                                    <div class="form-group input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"> <i class="fa fa-asterisk"></i> </span>
+                                         </div>
+                                        <input type="password" name="opis" class="form-control" placeholder="Ponovite password" formControlName="repeatedPasswordKupca">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary  btn-block" (click)="updateKupac()"> Promeni podatke  </button>
+                                    </div>   
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

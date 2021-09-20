@@ -1,0 +1,77 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+
+
+
+<div class="container">
+	<div class="card bg-light">
+		<article class="card-body mx-auto" style="max-width: 1000px;">
+			<div *ngIf="showIzborProdavaca">
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="fa fa-building"></i> </span>
+                    </div>
+                    <select class="form-control" [(ngModel)]="myProdavacSelect" (change)="selectProdavacChange()"> <!---->
+                        <option selected="">Izaberite prodavca</option>
+                        <option *ngFor="let prodavac of prodavci" [value]="prodavac.username"> <input type="hidden" id="prodavacId" [value]="prodavac.username"> {{ prodavac.username }}</option>
+                    </select>
+                </div>
+    
+                <!--<div class="form-group">
+                    <button type="submit" class="btn btn-primary  btn-block" (click)="getAkcijeProdavcaByProdavacUsername(getProdavacId())"> Izaberi  </button>
+                </div>-->
+            </div>
+
+            <div *ngIf="showListaAkcija">
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                    </div>
+                    <select class="form-control" [(ngModel)]="myAkcijaSelect" (change)="selectAkcijaChange()"> <!---->
+                        <option selected="true">Izaberite akciju</option>
+                        <option *ngFor="let akcija of akcijeOdabranogProdavca" [value]="akcija.id"> <input type="hidden" id="akcijaId" [value]="akcija.id"> {{ akcija.tekst }}</option>
+                    </select>
+                </div>
+
+                <!--<div class="form-group">
+                    <button type="submit" class="btn btn-primary  btn-block" (click)="getArtikliAkcije(getAkcijaId())"> Prikazi artikle akcije  </button>
+                </div>-->
+            </div>
+
+            <div *ngIf="showListaArtikala">
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                    </div>
+
+                    <div>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Slika</th>
+                                    <th>Naziv</th>
+                                    <th>Opis</th>
+                                    <th>Originalna cena</th>
+                                    <th>Umanjena cena</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr *ngFor="let artikal of artikliNaAkciji">
+                                    <td><img id="img" alt="Problem sa slikom :(" src="data:image/jpg;base64,{{ artikal.putanjaSlike }}"></td>
+                                    <td>{{ artikal.naziv }}</td>
+                                    <td>{{ artikal.opis }}</td>
+                                    <td>{{ artikal.cena }}</td>
+                                    <td>{{ artikal.cena - (artikal.cena * (procenat/100))}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+		</article>
+	</div>
+</div>

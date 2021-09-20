@@ -1,0 +1,39 @@
+<div class="container">
+    <div class="search-results" infinite-scroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()">
+        <div class="row pt-5">
+            <div class="col-md-4 p-3" *ngFor="let article of articlesForShowing">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <div class="card-title text-center">
+                            <div class="container" name="image">
+                                <img id="img" alt="Problem sa slikom :(" src="data:image/jpeg;base64,{{ article.putanjaSlike }}"/>
+                            </div>
+                            {{ article.id }} | {{ article.naziv }} 
+                            <hr>
+                            <p class="card-text">{{ article.opis }}</p>
+                            <div *ngIf="isAnyoneLoggedIn()">
+                                <a class="btn btn-primary" (click)="detalji(article.id)">Detalji</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row pb-5">
+        <div class="col-md-12 p-5">
+            <ngx-spinner bdOpacity=0.9 bdColor="" size="default" color="#581f87" type="ball-pulse-sync" [fullScreen]="false">
+            </ngx-spinner>
+        </div>
+    </div>
+
+    <div *ngIf="!notEmptyPost" class="row pb-5">
+        <div class="col-md-12 d-flex justify-content-center">
+            <div class="text-muted h6 alert alert-secondary p-2">
+                Nema vise artikala!
+            </div>
+        </div>
+    </div>
+
+</div>

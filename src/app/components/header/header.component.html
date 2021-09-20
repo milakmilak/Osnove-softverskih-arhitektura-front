@@ -1,0 +1,65 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light" (scroll)="onScroll()" [ngClass]="isNavbarFixed?'fixed':'nofixed'">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Dostava</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            </ul>
+        </div>
+
+        <div>
+            <div class="btn-group me-2" *ngIf="isKupacLoggedIn()">
+                <button type="button" class="btn btn-secondary" (click)="kupacProfile()" data-bs-toggle="dropdown" data-bs-display="static">Profile</button>
+            </div>
+
+            <div class="btn-group me-2" *ngIf="isProdavacLoggedIn()">
+                <button type="button" class="btn btn-secondary" (click)="prodavacProfile()" data-bs-toggle="dropdown" data-bs-display="static">Profile</button>
+            </div>
+
+            <div class="btn-group" *ngIf="isKupacLoggedIn()">
+                <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static">More</button>
+                <ul class="dropdown-menu dropdown-menu-lg-end">
+                    <li><button class="dropdown-item" type="button" (click)="kreirajPorudzbinu()">Nova porudzbina</button></li>
+                    <li><button class="dropdown-item" type="button" (click)="porudzbine()">Porudzbine</button></li>
+                    <li><button class="dropdown-item" type="button" (click)="akcije()">Akcije</button></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><button class="dropdown-item" type="button" (click)="logout()">Logout</button></li>
+                </ul>
+            </div>
+
+            <div class="btn-group" *ngIf="isProdavacLoggedIn()">
+                <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static">More</button>
+                <ul class="dropdown-menu dropdown-menu-lg-end">
+                    <li><button class="dropdown-item" type="button" (click)="kreirajArtikal()">Novi artikal</button></li>
+                    <li><button class="dropdown-item" type="button" (click)="kreirajAkciju()">Nova akcija</button></li>
+                    <li><button class="dropdown-item" type="button" (click)="showMojiArtikli()">Moji artikli</button></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><button class="dropdown-item" type="button" (click)="logout()">Logout</button></li>
+                </ul>
+            </div>
+
+            <!--<div class="btn-group" *ngIf="isAdminLoggedIn()">
+                <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static">More</button>
+                <ul class="dropdown-menu dropdown-menu-lg-end">
+                    <li><button class="dropdown-item" type="button">Profile</button></li>
+                    <li><button class="dropdown-item" type="button">All rented books</button></li>
+                    <li><button class="dropdown-item" type="button">Users</button></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><button class="dropdown-item" type="button" (click)="logout()">Logout</button></li>
+                </ul>
+            </div>-->
+
+            <div class="btn-group" *ngIf="!isAnyoneLoggedIn()">
+                <button type="button" class="btn btn-primary" data-bs-display="static" (click)="login()">Login</button>
+            </div>
+        </div>
+    </div>
+</nav>
